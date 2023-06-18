@@ -3,15 +3,16 @@ package com.codemind.springboot.DemoSecurity.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
 
-    @Bean
+   /* @Bean
     public InMemoryUserDetailsManager userDetailsManager(){
 
         UserDetails abdul= User.builder()
@@ -31,6 +32,11 @@ public class DemoSecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(abdul,sakib,faizan);
+    }*/
+
+    @Bean
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
+        return new JdbcUserDetailsManager(dataSource);
     }
 
 
@@ -39,6 +45,9 @@ public class DemoSecurityConfig {
 
         http.authorizeHttpRequests(configurer->
                 configurer
+                        .requestMatchers("/").hasRole("EMPLOYEE")
+                        .requestMatchers("/leaders/**").hasRole("MANAGER")
+                        .requestMatchers("/systems/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
         )
         .formLogin(form->
@@ -46,6 +55,14 @@ public class DemoSecurityConfig {
                         .loginPage("/showLoginPage")
                         .loginProcessingUrl("/authenticateTheUser")
                         .permitAll()
+
+        )
+        .logout(logout ->
+                        logout.permitAll()
+
+        )
+        .exceptionHandling(configurer->
+                configurer.accessDeniedPage("/access-denied")
         );
 
         return http.build();
