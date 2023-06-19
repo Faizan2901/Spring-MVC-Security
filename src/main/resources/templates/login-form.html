@@ -1,6 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<section class="h-100 gradient-form" style="background-color: #eee;">
-    <!-- Font Awesome -->
+<head>
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
             rel="stylesheet"
@@ -16,7 +15,75 @@
             rel="stylesheet"
     />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/loginForm.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/loginForm.css}">-->
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-form {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-form h1 {
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #45a049;
+}
+
+.signup-link {
+  font-size: 14px;
+  color: #666666;
+}
+
+.signup-link a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+    </style>
+</head>
+<body>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <!-- Font Awesome -->
+
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
@@ -77,4 +144,6 @@
         </div>
     </div>
 </section>
+</body>
+
 </html>

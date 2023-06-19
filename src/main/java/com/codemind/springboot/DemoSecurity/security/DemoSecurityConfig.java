@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 @Configuration
 public class DemoSecurityConfig {
 
-   /* @Bean
+    /*@Bean
     public InMemoryUserDetailsManager userDetailsManager(){
 
         UserDetails abdul= User.builder()
@@ -36,7 +36,12 @@ public class DemoSecurityConfig {
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager theJdbcUserDetailsManager=new JdbcUserDetailsManager(dataSource);
+
+        theJdbcUserDetailsManager.setUsersByUsernameQuery("SELECT user_id,pw,active FROM members WHERE user_id=?");
+        theJdbcUserDetailsManager.setAuthoritiesByUsernameQuery("SELECT user_id,role FROM roles WHERE user_id=?");
+
+        return theJdbcUserDetailsManager;
     }
 
 
